@@ -1,0 +1,35 @@
+<div class="container">
+    {{#if orderDetails}}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Address</th>
+                <th scope="col">Pincode</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orderDetails}}
+            <tr>
+                <td>{{this.date}}</td>
+                <td>{{this.address}}</td>
+                <td>{{this.pincode}}</td>
+                <td>{{this.mobile}}</td>
+                <td>{{this.amount}}</td>
+                <td>{{this.payment}}</td>
+                <td>{{this.status}}</td>
+                <td><a href="/view-order-products?id={{this._id}}" class="btn btn-primary">View Products</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <div class="no-order-txt d-flex align-items-center justify-content-center" style="height: 90vh; width:100%">
+        <h1>No Orders yet!</h1>
+    </div>
+    {{/if}}
+</div>

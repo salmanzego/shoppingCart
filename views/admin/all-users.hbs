@@ -1,0 +1,20 @@
+<div class="container">
+    <table class="table table-bordered tabel-light mt-5">
+        <thead>
+            <tr>
+                <th scope="col">SI</th>
+                <th scope="col">User</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>{{add @index 1}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.email}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

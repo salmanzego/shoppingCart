@@ -1,0 +1,41 @@
+<section>
+  <div class="container">
+    <div class="row">
+      {{#each products}}
+      <div class="card col-md-3 m-3 mt-5" style="width: 15rem; height:auto;">
+        <div class="top-img-space d-flex align-items-center" style="height: 15rem;">
+          <img src="/product-images/{{this._id}}.jpg" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{this.name}}</h5>
+          <p class="card-text">{{this.description}}</p>
+          <p class="card-text">₹{{this.price}}</p>
+          {{#if ../user}}
+          <a onclick="addToCart('{{this._id}}')" class="btn btn-primary">Add to cart</a>
+          {{else}}
+          <a href="/login" class="btn btn-primary">Add to cart</a>
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+
+<script>
+  function addToCart(proId){
+    $.ajax({
+      url:'/add-to-cart',
+      data:{
+        proId:proId
+      },
+      method:'post',
+      success:(result)=>{
+        if(result.status){
+           document.getElementById('cartCount').innerHTML= parseInt(document.getElementById('cartCount').innerHTML)+1
+        }
+      }
+    })
+  }
+</script>

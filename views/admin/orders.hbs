@@ -1,0 +1,45 @@
+<div class="container">
+    <table class="table" id="all-order-products">
+        <thead>
+            <tr>
+                <th scope="col">SI</th>
+                <th scope="col">Date</th>
+                <th scope="col">User</th>
+                <th scope="col">Address</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Status</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orderDetails}}
+            <tr>
+                <td>{{add @index 1}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.userName}}</td>
+                <td>{{this.address}}</td>
+                <td>{{this.mobile}}</td>
+                <td>{{this.status}}</td>
+                {{#ifEquals this.status "shipped"}}
+                <td><a onclick="markShipped('{{../this.orderId}}')" class="btn btn-primary m-2 disabled" id="markShip">Mark Shipped</a><a href="/admin/view-odproducts/?id={{../this.orderId}}" class="btn btn-primary m-2">View Products</a></td>
+                {{else}}
+                <td><a onclick="markShipped('{{../this.orderId}}')" class="btn btn-primary m-2" id="markShip">Mark Shipped</a><a href="/admin/view-odproducts/?id={{../this.orderId}}" class="btn btn-primary m-2">View Products</a></td>
+                {{/ifEquals}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function markShipped(orderId){
+        $.ajax({
+            url:'/admin/mark-shipped',
+            method:'post',
+            data:{orderId},
+            success:(response)=>{
+                $( "#all-order-products" ).load(window.location.href + " #all-order-products" );
+            }
+        })
+    }
+</script>

@@ -1,0 +1,43 @@
+<section>
+    <div class="container">
+        <div class="mt-5 d-flex">
+            <a href="/admin/logout" class="btn btn-danger">Logout</a>
+            <a href="/admin/add-product" class="btn btn-primary ms-auto">Add Product</a>
+        </div>
+        <hr>
+        <table class="table table-bordered tabel-light mt-5" id="all-products">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <th scope="row">{{add @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.category}}</td>
+                    <td>₹{{this.price}}</td>
+                    <td><img src="/product-images/{{this._id}}.jpg" style="width:50px"></td>
+                    <td>
+                        <a href="/admin/edit-product/?id={{this._id}}" class="btn btn-primary">Edit</a>
+                        <a href="/admin/delete-product/?id={{this._id}}"
+                            onclick="return confirm('Are you sure to delete {{this.name}}')"
+                            class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('#all-products').DataTable();
+    });
+</script>

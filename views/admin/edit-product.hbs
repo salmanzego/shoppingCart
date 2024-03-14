@@ -1,0 +1,45 @@
+<section>
+    <div class="container">
+        <h2 class="mt-5">Edit Product</h2>
+        <form class="mt-5" action="/admin/update-product?id={{product._id}}" method="POST" enctype="multipart/form-data">
+            <!-- Text input -->
+            <div class="form-outline mb-4">
+                <input type="text" name="name" class="form-control" value="{{product.name}}"/>
+                <label class="form-label">Name</label>
+            </div>
+
+            <!-- Text input -->
+            <div class="form-outline mb-4">
+                <input type="text" name="category" class="form-control" value="{{product.category}}" />
+                <label class="form-label">Category</label>
+            </div>
+            <!-- Text input -->
+            <div class="form-outline mb-4">
+                <input type="text" name="description" class="form-control" value="{{product.description}}"/>
+                <label class="form-label">description</label>
+            </div>
+             <!-- Text input -->
+            <div class="form-outline mb-4">
+                <input type="text" name="price" class="form-control" value="{{product.price}}" />
+                <label class="form-label">price</label>
+            </div>
+             <div class="form-outline mb-4">
+                <img src="/product-images/{{product._id}}.jpg" alt="" style="width: 100px;" id="prodView" class="mb-5">
+                <input type="file" name="image" class="form-control" onchange="loadFile(event)"/>
+                <label class="form-label">image</label>
+            </div>
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    let loadFile = (event)=>{
+        let output= document.getElementById('prodView');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = ()=>{
+            URL.revokeObjectURL(output.src);
+        }
+    }
+</script>
